@@ -277,9 +277,6 @@ const Registration = () => {
 					</div>
 				</form>
 			</div>
-			{openModal && (
-				<EmailConfirmation closeModal={() => setOpenModal(false)} />
-			)}
 		</div>
 	);
 };

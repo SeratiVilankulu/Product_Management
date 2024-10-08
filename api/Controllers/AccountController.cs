@@ -87,7 +87,7 @@ namespace api.Controllers
           var recipient = appUser.Email;
           var subject = "Verify your email";
           var header = "Welcome";
-          var userName = appUser.Name +" "+ appUser.Surname;
+          var userName = appUser.Name + " " + appUser.Surname;
           var message = "Verify your email address to log in and get started.";
           var actionText = "Verify Email";
 
@@ -151,7 +151,7 @@ namespace api.Controllers
         user.VerifiedDate = DateTime.Now;
         await _context.SaveChangesAsync();
 
-        return Redirect("http://localhost:3100/email-success");
+        return Redirect("http://localhost:517/email-success");
       }
 
       // Handle errors during email confirmation
@@ -221,12 +221,12 @@ namespace api.Controllers
         var userToken = await _userManager.GeneratePasswordResetTokenAsync(user);
         if (userToken != null)
         {
-          var emailResetLink = $"http://localhost:3100/reset-password?token={Uri.EscapeDataString(userToken)}&userId={user.Id}"; // Link which directs user to Reset password page
+          var emailResetLink = $"http://localhost:5173/reset-password?token={Uri.EscapeDataString(userToken)}&userId={user.Id}"; // Link which directs user to Reset password page
 
           var recipient = forgotPasswordDto.Email.ToLower();
           var subject = "Password Reset";
           var header = "Password Reset Request";
-          var userName = $"Dear {user.Name +" "+ user.Surname}";
+          var userName = $"Dear {user.Name + " " + user.Surname}";
           var message = $"We received a request to reset your password. " +
                         $"If you didn't request this, please ignore this email.";
           var actionText = "Reset Password";
@@ -295,7 +295,7 @@ namespace api.Controllers
         return BadRequest(new { message = "Password reset process has failed", errors });
       }
 
-      var backToLogin = Url.Action("http://localhost:3100");
+      var backToLogin = Url.Action("http://localhost:5173");
       // Prepare email details
       var recipient = user.Email;
       var subject = "Confirmation on Reset password";

@@ -18,11 +18,11 @@ namespace api.Repository
       _context = context;
     }
 
-    public async Task<List<ProductSale>> GetAllAsync(QueryObject query)
+    public async Task<List<ProductSale>> GetById(QueryObject query)
     {
       var productSales = _context.ProductSales.AsQueryable();
 
-      //Filtering user the products Id
+      //Filtering products by the products Id
       if (query.ProductId.HasValue)
       {
         productSales = productSales.Where(p => p.ProductId == query.ProductId.Value);

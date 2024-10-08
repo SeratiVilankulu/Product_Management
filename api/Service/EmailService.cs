@@ -32,7 +32,7 @@ namespace api.Service
       <div style='max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);'>
         <!-- Header with Logo -->
         <div style='background-color: rgb(77, 170, 87); padding: 20px; text-align: center; border-top-left-radius: 8px; border-top-right-radius: 8px;'>
-          <h1 style='color: #ffffff; margin: 0; font-size: 28px;'>TravelMate</h1>
+          <h1 style='color: #ffffff; margin: 0; font-size: 28px;'>Fresh Farm Fare</h1>
         </div>
 
         <!-- Body content -->

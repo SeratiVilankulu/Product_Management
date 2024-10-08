@@ -86,7 +86,7 @@ const Login = () => {
 								Welcome to <br />
 								<span className={LoginStyles.name}>Fresh Farm Fare</span>
 							</h2>
-							<h3>Sign In</h3>
+							<p>Sign In</p>
 						</div>
 						<div className={LoginStyles.inputWrapper}>
 							<div className={LoginStyles.inputContainer}>

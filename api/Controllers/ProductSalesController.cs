@@ -24,12 +24,12 @@ namespace api.Controllers
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAll([FromQuery] QueryObject query)
+    public async Task<IActionResult> GetById([FromQuery] QueryObject query)
     {
       if (!ModelState.IsValid)
         return BadRequest(ModelState);
 
-      var productSales = await _productSaleRepo.GetAllAsync(query);
+      var productSales = await _productSaleRepo.GetById(query);
 
       var productSaleDto = productSales.Select(s => s.ToProductSaleDto());
 

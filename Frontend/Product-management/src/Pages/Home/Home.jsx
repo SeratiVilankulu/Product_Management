@@ -3,18 +3,22 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import homeStyles from "./Home.module.css";
 import { IoMdSearch } from "react-icons/io";
+import { BiCartAdd } from "react-icons/bi";
 import SideNavigations from "../Navigations/SideNavigations";
 import TopNavigations from "../Navigations/TopNavigations";
+import ReactPaginate from "react-paginate";
 
 const Home = () => {
 	const [products, setProducts] = useState([]);
 	const [searchTerm, setSearchTerm] = useState("");
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
+	const [currentPage, setCurrentPage] = useState(0);
 
 	const navigate = useNavigate();
+	const itemsPerPage = 10; // Number of products per page
 
-	// Function to fetch product link from database
+	// Fetch products from the database
 	useEffect(() => {
 		const fetchProducts = async () => {
 			try {
@@ -35,7 +39,22 @@ const Home = () => {
 		product.productName.toLowerCase().includes(searchTerm.toLowerCase())
 	);
 
-	//Function to view product details
+	// Calculate page count
+	const pageCount = Math.ceil(filteredProducts.length / itemsPerPage);
+
+	// Get the products for the current page
+	const indexOfFirst = currentPage * itemsPerPage;
+	const currentProducts = filteredProducts.slice(
+		indexOfFirst,
+		indexOfFirst + itemsPerPage
+	);
+
+	// Handle page click
+	const handlePageClick = ({ selected }) => {
+		setCurrentPage(selected);
+	};
+
+	// Function to view product details
 	const handleProductClick = (product) => {
 		console.log("Navigating to product ID:", product.id);
 		if (product.id) {
@@ -51,7 +70,10 @@ const Home = () => {
 			<SideNavigations />
 			<div className={homeStyles.homeContainer}>
 				<div className={homeStyles.search}>
-					<span>Organic Fruits & Vegetables</span>
+					<div className={homeStyles.searchSlogan}>
+						<h2>Organic Fruits & Vegetables</h2>
+						<p>Get the best and freshest Fruit and Vegetables</p>
+					</div>
 					<IoMdSearch className={homeStyles.searchIcon} />
 					<div className={homeStyles.filter}>
 						<input
@@ -68,7 +90,7 @@ const Home = () => {
 				{!loading && filteredProducts.length === 0 && <p>No products found.</p>}
 
 				<div className={homeStyles.productCard}>
-					{filteredProducts.map((product, index) => (
+					{currentProducts.map((product, index) => (
 						<div key={index} className={homeStyles.productDisplay}>
 							<img
 								src={product.image}
@@ -82,13 +104,27 @@ const Home = () => {
 									className={homeStyles.ProductName}
 								>
 									{product.productName}
+									<p className={homeStyles.imagePrice}>R{product.salePrice}</p>
 								</h3>
-								<h3 className={homeStyles.imageCategory}>{product.category}</h3>
-								<p className={homeStyles.imagePrice}>R{product.salePrice}</p>
+								<h3 className={homeStyles.imageCategory}>
+									{product.category}
+									<button className={homeStyles.addToCart}>
+										Add <BiCartAdd />
+									</button>
+								</h3>
 							</div>
 						</div>
 					))}
 				</div>
+
+				<ReactPaginate
+					previousLabel={"Previous"}
+					nextLabel={"Next"}
+					pageCount={pageCount}
+					onPageChange={handlePageClick}
+					containerClassName={homeStyles.pagination}
+					activeClassName={homeStyles.activePage}
+				/>
 			</div>
 		</div>
 	);

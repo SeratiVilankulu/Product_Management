@@ -20,30 +20,42 @@
 .search {
 	display: flex;
 	justify-content: center;
-	padding: 150px 400px 150px 150px;
+	align-items: center;
+	padding: 97px;
 	border-radius: 5px;
-	margin: 20px;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	background-color: #f8f9fa;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 	background-image: url("Images/display.jpg");
 	background-position: center;
 	background-repeat: no-repeat, repeat;
 	background-size: cover;
-	max-width: 100%;
-	height: auto;
+	width: 75%;
+	margin: 20px 0px;
+}
+
+.searchSlogan{
+	position: relative;
+	right: 70px;
+	bottom: 50px;
+}
+
+.searchSlogan p{
+	font-size: 18px;
+	margin: 10px 3px;
 }
 
 .searchIcon {
 	position: relative;
-	top: 117px;
-	right: 60px;
+	top: 8vh;
+	right: 60vh;
 	color: grey;
 	z-index: 1;
 }
 
 .filter {
 	position: relative;
-	top: 100px;
-	right: 120px;
+	top:8vh;
+	right:65vh;
 	border-radius: 20px;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 	background: white;
@@ -56,7 +68,7 @@
 
 .filter input {
 	border: none;
-	width: 300px;
+	width: 340px;
 	height: 50px;
 }
 
@@ -65,34 +77,19 @@
 	color: grey;
 }
 
-.search button {
-	position: relative;
-	top: 19px;
-	left: 20px;
-	width: 150px;
-	height: 50px;
-	background: rgb(77, 170, 87);
-	border: none;
-	border-radius: 20px;
-	cursor: pointer;
-	font-size: 15px;
-	font-weight: 600;
-}
-
 .productCard {
-	display: flex;
-	justify-content: center;
-	position: relative;
-	top: 5vh;
-	display: flex;
-	flex-wrap: wrap;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+	border-radius: 5px;
 	gap: 20px;
 	width: 90%;
+	margin-top: 20px;
 }
 
 .productDisplay {
 	border-radius: 5px;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	transition: transform 0.2s, box-shadow 0.2s;
 	background: white;
 	width: 250px;
 	height: 280px;
@@ -102,10 +99,15 @@
 	align-items: center;
 }
 
+.productDisplay:hover {
+	transform: translateY(-3px);
+	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
 .image {
 	position: relative;
 	top: 10px;
-	width: 80%;
+	width: 82%;
 	height: 65%;
 	border-radius: 4px;
 	cursor: pointer;
@@ -116,8 +118,13 @@
 	flex-direction: column;
 	position: relative;
 	top: 15px;
-	left: 17px;
-	width: 100%;
+	left: 5px;
+	width: 90%;
+}
+
+h3 {
+	display: flex;
+	justify-content: space-between;
 }
 
 .imageDetails h3,
@@ -125,6 +132,7 @@ p {
 	cursor: pointer;
 	margin: 3px 10px;
 }
+
 .imageDetails .ProductName {
 	color: black;
 }
@@ -135,5 +143,50 @@ p {
 }
 
 .imageDetails p {
-	color: rgb(104, 102, 102);
+	color: rgb(77, 170, 87);
+}
+
+.addToCart {
+	border: none;
+	color: black;
+	font-weight: 600;
+	background: none;
+	font-size: 15px;
+}
+
+.addToCart:hover {
+	border-radius: 5px;
+	padding: 5px;
+	background: rgb(77, 170, 87);
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	color: #f8f9fa;
+	cursor: pointer;
+	font-weight: 600;
+}
+
+.pagination {
+	display: flex;
+	justify-content: center;
+	list-style: none;
+	padding: 10px 0;
+	position: relative;
+	top: 10px;
+	margin: auto;
+}
+
+.pagination li {
+	margin: 0 5px;
+	padding: 5px 10px;
+	cursor: pointer;
+}
+
+.pagination li:hover {
+	background-color: #f1f1f1;
+}
+
+.activePage {
+	background-color: #4daa57;
+	border-radius: 5px;
+	color: black;
+	font-weight: bold;
 }

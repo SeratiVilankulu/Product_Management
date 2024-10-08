@@ -9,6 +9,6 @@ namespace api.Interface
 {
   public interface IProductSaleRepository
   {
-    Task<List<ProductSale>> GetAllAsync(QueryObject query);
+    Task<List<ProductSale>> GetById(QueryObject query);
   }
 }
