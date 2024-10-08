@@ -1,0 +1,139 @@
+.homeWrapper {
+	position: relative;
+	top: 50px;
+	display: flex;
+	justify-content: center;
+	min-width: 100%;
+	min-height: 100vh;
+}
+
+.homeContainer {
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background: rgba(226, 225, 225, 0.637);
+	min-height: 100%;
+	width: 100%;
+}
+
+.search {
+	display: flex;
+	justify-content: center;
+	padding: 150px 400px 150px 150px;
+	border-radius: 5px;
+	margin: 20px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	background-image: url("Images/display.jpg");
+	background-position: center;
+	background-repeat: no-repeat, repeat;
+	background-size: cover;
+	max-width: 100%;
+	height: auto;
+}
+
+.searchIcon {
+	position: relative;
+	top: 117px;
+	right: 60px;
+	color: grey;
+	z-index: 1;
+}
+
+.filter {
+	position: relative;
+	top: 100px;
+	right: 120px;
+	border-radius: 20px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	background: white;
+	width: 450px;
+	height: 50px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.filter input {
+	border: none;
+	width: 300px;
+	height: 50px;
+}
+
+.filter input::placeholder {
+	font-size: 15px;
+	color: grey;
+}
+
+.search button {
+	position: relative;
+	top: 19px;
+	left: 20px;
+	width: 150px;
+	height: 50px;
+	background: rgb(77, 170, 87);
+	border: none;
+	border-radius: 20px;
+	cursor: pointer;
+	font-size: 15px;
+	font-weight: 600;
+}
+
+.productCard {
+	display: flex;
+	justify-content: center;
+	position: relative;
+	top: 5vh;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px;
+	width: 90%;
+}
+
+.productDisplay {
+	border-radius: 5px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	background: white;
+	width: 250px;
+	height: 280px;
+	z-index: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.image {
+	position: relative;
+	top: 10px;
+	width: 80%;
+	height: 65%;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.imageDetails {
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	top: 15px;
+	left: 17px;
+	width: 100%;
+}
+
+.imageDetails h3,
+p {
+	cursor: pointer;
+	margin: 3px 10px;
+}
+.imageDetails .ProductName {
+	color: black;
+}
+
+.imageDetails h3 {
+	font-size: 15px;
+	color: rgb(77, 170, 87);
+}
+
+.imageDetails p {
+	color: rgb(104, 102, 102);
+}

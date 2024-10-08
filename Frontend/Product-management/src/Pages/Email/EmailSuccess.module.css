@@ -1,0 +1,44 @@
+.confirmContainer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	text-align: center;
+	min-width: 100vw;
+	height: 100vh;
+}
+
+.heading {
+	font-size: 25px;
+	color: rgb(15, 60, 76);
+}
+
+.message {
+	font-size: 15px;
+	font-weight: 500;
+	color: rgb(15, 60, 76);
+}
+
+.icon {
+	padding-top: 20px;
+	font-size: 50px;
+	color: Green;
+}
+
+.BackToLogin {
+	background-color: rgb(77, 170, 87);
+	color: #2e2e3f;
+	padding: 11px 20px;
+	border: none;
+	border-radius: 4px;
+	font-size: 16px;
+	width: 300px;
+	margin-top: 20px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+.BackToLogin:hover {
+	background: white;
+	border: 1px solid rgb(77, 170, 87);
+}
