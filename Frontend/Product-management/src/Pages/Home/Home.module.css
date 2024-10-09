@@ -1,8 +1,8 @@
 .homeWrapper {
-	position: relative;
-	top: 50px;
+	position: absolute;
+	top: 70px;
+	left: 420px;
 	display: flex;
-	justify-content: center;
 	min-width: 100%;
 	min-height: 100vh;
 }
@@ -13,8 +13,7 @@
 	flex-direction: column;
 	align-items: center;
 	background: rgba(226, 225, 225, 0.637);
-	min-height: 100%;
-	width: 100%;
+	width: 80%;
 }
 
 .search {
@@ -33,15 +32,16 @@
 	margin: 20px 0px;
 }
 
-.searchSlogan{
+.searchSlogan {
 	position: relative;
 	right: 70px;
 	bottom: 50px;
 }
 
-.searchSlogan p{
+.searchSlogan p {
 	font-size: 18px;
 	margin: 10px 3px;
+	color: rgb(28, 55, 32);
 }
 
 .searchIcon {
@@ -54,8 +54,8 @@
 
 .filter {
 	position: relative;
-	top:8vh;
-	right:65vh;
+	top: 8vh;
+	right: 65vh;
 	border-radius: 20px;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 	background: white;
@@ -70,10 +70,18 @@
 	border: none;
 	width: 340px;
 	height: 50px;
+	color: rgb(28, 56, 32);
+	font-size: 18px;
 }
 
 .filter input::placeholder {
 	font-size: 15px;
+	color: grey;
+}
+
+.noResult {
+	margin: auto;
+	font-size: 1.5rem;
 	color: grey;
 }
 
@@ -134,7 +142,7 @@ p {
 }
 
 .imageDetails .ProductName {
-	color: black;
+	color: rgb(28, 55, 32);
 }
 
 .imageDetails h3 {
@@ -148,7 +156,7 @@ p {
 
 .addToCart {
 	border: none;
-	color: black;
+	color: rgb(28, 56, 32);
 	font-weight: 600;
 	background: none;
 	font-size: 15px;
@@ -157,7 +165,7 @@ p {
 .addToCart:hover {
 	border-radius: 5px;
 	padding: 5px;
-	background: rgb(77, 170, 87);
+	background: rgba(77, 170, 86, 0.878);
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 	color: #f8f9fa;
 	cursor: pointer;
@@ -187,6 +195,6 @@ p {
 .activePage {
 	background-color: #4daa57;
 	border-radius: 5px;
-	color: black;
+	color: rgb(28, 55, 32);
 	font-weight: bold;
 }

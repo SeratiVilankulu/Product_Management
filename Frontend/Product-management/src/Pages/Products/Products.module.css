@@ -1,69 +1,179 @@
 .detailsWrapper {
 	display: flex;
+	flex-direction: column;
 	min-height: 100vh;
-	justify-content: space-between;
-	align-items: center;
 	background-color: #f2f2f2;
-	padding: 0 60px;
 }
 
-.detailsContainer span {
+.detailsContainer {
+	flex-grow: 1;
+	padding: 25px;
+	width: 50vw;
+	background-color: white;
+	border-radius: 8px;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 	position: absolute;
-	top: 20px;
-	font-size: 30px;
+	top: 10vh;
+	left: 50vh;
 }
 
-.producImage {
-	position: relative;
-	left: 20vh;
-}
-
-.producImage .image {
-	position: relative;
-	width: 70vh;
-	height: 60vh;
+.totalSales,
+.totalProducts {
+	padding: 25px;
+	background-color: white;
+	border-radius: 8px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+	position: absolute;
+	right: 30px;
+	width: 300px;
+	height: 140px;
+	margin: 10px 0;
 	text-align: center;
+	font-size: 20px;
+	font-weight: 600;
+	color: rgb(28, 55, 32);
 }
 
-.image {
-	width: 100%;
+.totalSales h2,
+.totalProducts h2 {
+	margin-top: 10p;
+}
+
+.totalSales {
+	top: 85px;
+}
+
+hr {
+	width: 150px;
+	color: rgb(28, 55, 32);
+}
+
+.totalProducts {
+	top: 300px;
+}
+
+.closeBtn {
+	position: absolute;
+	top: 5px;
+	right: 10px;
+	font-size: 30px;
+	cursor: pointer;
+	font-size: 2rem;
+}
+
+.productImage {
+	display: flex;
+	gap: 30px;
+}
+
+.productImage .image {
+	display: flex;
+	gap: 30px;
 	height: auto;
 	border-radius: 10px;
 }
 
-.productDetails {
-	position: absolute;
-	top: 50px;
-	width: 100%;
-}
-
-.productTitle {
-	font-size: 24px;
-	margin: 15px 0;
-	color: #333;
-}
-
-.productPrice {
-	font-size: 20px;
-	font-weight: bold;
-	color: #28a745;
-	margin: 0px;
-}
-
-.productCategory {
-	font-size: 17px;
-	font-weight: 600;
-	margin: 10px 0;
-	color: #666;
-}
-
-.productSales {
-	width: 50%;
-	padding: 30px;
-	text-align: center;
+img {
 	border-radius: 10px;
 }
 
-.Sale {
-	box-shadow: 0 2px 6px rgba(77, 170, 86, 0.767);
+.productTitle {
+	font-size: 1.75rem;
+	color: #333;
+	margin: 0 0 10px;
+}
+
+.productPrice {
+	font-size: 1.5rem;
+	color: rgb(77, 170, 87);
+	margin: 5px 0;
+	font-weight: bold;
+}
+
+.productCategory {
+	font-size: 1rem;
+	color: #888;
+	margin: 15px 0px;
+}
+
+.summaryTable {
+	position: absolute;
+	top: 55vh;
+	left: 50vh;
+	width: 100%;
+	max-width: 1010px;
+	background-color: #ffffff;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	border-radius: 8px;
+	overflow: hidden;
+}
+
+table .summaryTable {
+	position: absolute;
+	max-height: 350px;
+	overflow-y: auto;
+}
+
+.productSales {
+	position: absolute;
+	top: 61vh;
+	left: 49.5vh;
+	overflow-y: auto;
+	height: 350px;
+}
+
+.productSales h2 {
+	font-size: 1.75rem;
+	color: rgb(77, 170, 87);
+	margin-bottom: 20px;
+}
+
+.sales {
+	gap: 20px;
+}
+
+.saleDisplay {
+	border-radius: 10px;
+	box-shadow: 0 4px 8px rgba(104, 103, 103, 0.05);
+	transition: transform 0.2s ease;
+	background-color: white;
+	padding: 15px;
+	margin: 3px;
+	width: 985px;
+	display: flex;
+	justify-content: space-between;
+	flex-direction: row;
+	align-items: center;
+}
+
+.saleDisplay:hover {
+	transform: translateY(-3px);
+}
+
+.saleDisplay p {
+	margin: 10px 0;
+	font-size: 1rem;
+	color: #333;
+}
+
+.saleDisplay strong {
+	color: #555;
+}
+
+select {
+	padding: 10px;
+	font-size: 1rem;
+	border-radius: 5px;
+	border: 1px solid #ddd;
+	margin-bottom: 20px;
+	background-color: #fff;
+	width: 100%;
+}
+
+label {
+	margin-right: 10px;
+	font-size: 1.1rem;
+	color: #333;
+	display: block;
+	margin-bottom: 5px;
 }

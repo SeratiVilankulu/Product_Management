@@ -1,38 +1,61 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
 import axios from "axios";
 import productStyles from "./Products.module.css";
+import TopNavigation from "../Navigation/TopNavigation";
+import SideNavigation from "../Navigation/SideNavigation";
 import { IoIosClose } from "react-icons/io";
 
-const ProductsDetails = ({ onClose }) => {
+const ProductsDetails = () => {
 	const [sales, setSales] = useState([]);
+	const [totalQuantity, setTotalQuantity] = useState(0); // State for total quantity
+	const [totalCost, setTotalCost] = useState(0); //State for total cost
+
+	const navigate = useNavigate();
 	const location = useLocation();
-	const { id } = useParams(); // Get the productId from the URL
+	const { ID } = useParams(); // Get the productId from the URL
 	const product = location.state?.product;
 
 	// Function to fetch product sales for the individual product
 	useEffect(() => {
 		const fetchSales = async () => {
 			try {
-				const response = await axios.get(`http://localhost:5033/product-sales`);
+				const response = await axios.get(
+					`http://localhost:5033/product-sales?productId=${ID}`
+				);
 				setSales(response.data);
+
+				// Calculate the total quantity
+				const totalQty = response.data.reduce(
+					(sum, sale) => sum + sale.saleQty,
+					0
+				);
+				const totalPrice = response.data.reduce(
+					(sum, sale) => sum + sale.saleQty * sale.salePrice,
+					0
+				);
+
+				setTotalQuantity(totalQty); // Set the total quantity
+				setTotalCost(totalPrice);
 				console.log(response);
 			} catch (error) {
 				console.error("An error occurred while fetching product sales:", error);
 			}
 		};
-		if (id) {
+		if (ID) {
 			fetchSales();
 		}
-	}, [id]);
+	}, [ID]);
 
 	return (
 		<div className={productStyles.detailsWrapper}>
+			<TopNavigation />
+			<SideNavigation />
 			<div className={productStyles.detailsContainer}>
-				<span onClick={onClose}>
+				<span className={productStyles.closeBtn} onClick={() => navigate(-1)}>
 					<IoIosClose />
 				</span>
-				<div className={productStyles.producImage}>
+				<div className={productStyles.productImage}>
 					<div className={productStyles.image}>
 						<img
 							src={product?.image}
@@ -40,43 +63,57 @@ const ProductsDetails = ({ onClose }) => {
 							className={productStyles.image}
 						/>
 					</div>
-					<div className={productStyles.producDetails}>
+					<div className={productStyles.productDetails}>
 						<h3 className={productStyles.productTitle}>
 							{product?.productName}
-							<p className={productStyles.productPrice}>
-								R{product?.salePrice}
-							</p>
 						</h3>
 						<p className={productStyles.productCategory}>{product?.category}</p>
-						<br />
+						<p className={productStyles.productPrice}>
+							R{product?.salePrice.toFixed(2)}
+						</p>
 					</div>
 				</div>
 			</div>
+			<div className={productStyles.totalSales}>
+				<p>Total Sales</p>
+				<br />
+				<hr />
+				<h2>{totalQuantity}</h2>
+			</div>
+			<div className={productStyles.totalProducts}>
+				<p>Total products bought</p>
+				<br />
+				<hr />
+				<h2>R{totalCost}</h2>
+			</div>
 
-			<div className={productStyles.productSales}>
-				<h2>Sales History for {product?.productName}</h2>
-				{sales.length > 0 ? (
-					<div className={productStyles.sales}>
-						{sales.map((productSale, index) => (
-							<div key={index} className={productStyles.saleDisplay}>
-								<p>
-									<strong>Sale ID:</strong> {productSale.saleId}
-								</p>
-								<p>
-									<strong>Quantity Sold:</strong> {productSale.saleQty}
-								</p>
-								<p>
-									<strong>Price:</strong> R{productSale.salePrice}
-								</p>
-								<p>
-									<strong>Date:</strong> {productSale.saleDate}
-								</p>
-							</div>
-						))}
-					</div>
-				) : (
-					<p>No sales data available for this product.</p>
-				)}
+			<div className={productStyles.tableContainer}>
+				<table className={productStyles.summaryTable}>
+					<thead>
+						<tr>
+							<th>Quantity Sold</th>
+							<th>Price</th>
+							<th>Date</th>
+						</tr>
+					</thead>
+					<tbody>
+						{sales.length > 0 ? (
+							sales.map((productSale, index) => (
+								<tr key={index}>
+									<td>{productSale.saleQty}</td>
+									<td>R{productSale.salePrice.toFixed(2)}</td>
+									<td>
+										{new Date(productSale.saleDate).toLocaleDateString("en-GB")}
+									</td>
+								</tr>
+							))
+						) : (
+							<tr>
+								<td colSpan="3">No sales data available for this product.</td>
+							</tr>
+						)}
+					</tbody>
+				</table>
 			</div>
 		</div>
 	);

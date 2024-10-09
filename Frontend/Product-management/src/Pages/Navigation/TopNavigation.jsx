@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
 import { IoIosArrowForward, IoIosArrowDown } from "react-icons/io";
+import { LuShoppingBasket } from "react-icons/lu";
 import { useLocation } from "react-router-dom";
 import TopNavStyle from "./TopNav.module.css";
 
-const TopNav = () => {
+const TopNavigation = () => {
 	const [showProfile, setShowProfile] = useState(false);
 	const location = useLocation();
 	const navigate = useNavigate();
@@ -13,38 +14,24 @@ const TopNav = () => {
 	// Retrieve userData from localStorage
 	const userData = JSON.parse(localStorage.getItem("user"));
 
-	const getPageTitle = () => {
-		switch (location.pathname) {
-			case "/my-library":
-				return "My Library";
-			case "/home":
-				return "Home";
-			case "/upload-images":
-				return "Image Upload";
-			// Add more cases as needed
-			default:
-				return "Home";
-		}
-	};
-
 	const handleProfileClick = () => {
 		setShowProfile(!showProfile);
 	};
 
 	return (
-		<div>
+		<div className={TopNavStyle.topNavWrapper}>
 			<div className={TopNavStyle.topNav}>
 				<button className={TopNavStyle.topBtn}>
-					{getPageTitle()}
-					<IoIosArrowForward className={TopNavStyle.topNavIcons} />
-				</button>
-				<button className={TopNavStyle.profileBtn}>
 					<CgProfile />
 					{userData?.email}
 					<IoIosArrowDown
 						className={TopNavStyle.topNavIcons}
 						onClick={handleProfileClick}
 					/>
+				</button>
+				<button className={TopNavStyle.topBtn}>
+					Basket
+					<LuShoppingBasket className={TopNavStyle.topNavIcons} />
 				</button>
 			</div>
 			{showProfile && (
@@ -59,4 +46,4 @@ const TopNav = () => {
 	);
 };
 
-export default TopNav;
+export default TopNavigation;

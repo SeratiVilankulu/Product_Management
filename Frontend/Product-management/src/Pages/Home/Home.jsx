@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import homeStyles from "./Home.module.css";
 import { IoMdSearch } from "react-icons/io";
 import { BiCartAdd } from "react-icons/bi";
-import SideNavigations from "../Navigations/SideNavigations";
-import TopNavigations from "../Navigations/TopNavigations";
+import SideNavigation from "../Navigation/SideNavigation";
+import TopNavigation from "../Navigation/TopNavigation";
 import ReactPaginate from "react-paginate";
 
 const Home = () => {
@@ -65,66 +65,73 @@ const Home = () => {
 	};
 
 	return (
-		<div className={homeStyles.homeWrapper}>
-			<TopNavigations />
-			<SideNavigations />
-			<div className={homeStyles.homeContainer}>
-				<div className={homeStyles.search}>
-					<div className={homeStyles.searchSlogan}>
-						<h2>Organic Fruits & Vegetables</h2>
-						<p>Get the best and freshest Fruit and Vegetables</p>
-					</div>
-					<IoMdSearch className={homeStyles.searchIcon} />
-					<div className={homeStyles.filter}>
-						<input
-							type="text"
-							placeholder="Search for"
-							value={searchTerm}
-							onChange={(e) => setSearchTerm(e.target.value)}
-						/>
-					</div>
-				</div>
+		<div>
+			<TopNavigation />
+			<SideNavigation />
 
-				{loading && <p>Loading products...</p>}
-				{error && <p>{error}</p>}
-				{!loading && filteredProducts.length === 0 && <p>No products found.</p>}
-
-				<div className={homeStyles.productCard}>
-					{currentProducts.map((product, index) => (
-						<div key={index} className={homeStyles.productDisplay}>
-							<img
-								src={product.image}
-								alt={product.productName || "Product Image"}
-								className={homeStyles.image}
-								onClick={() => handleProductClick(product)}
-							/>
-							<div className={homeStyles.imageDetails}>
-								<h3
-									onClick={() => handleProductClick(product)}
-									className={homeStyles.ProductName}
-								>
-									{product.productName}
-									<p className={homeStyles.imagePrice}>R{product.salePrice}</p>
-								</h3>
-								<h3 className={homeStyles.imageCategory}>
-									{product.category}
-									<button className={homeStyles.addToCart}>
-										Add <BiCartAdd />
-									</button>
-								</h3>
-							</div>
+			<div className={homeStyles.homeWrapper}>
+				<div className={homeStyles.homeContainer}>
+					<div className={homeStyles.search}>
+						<div className={homeStyles.searchSlogan}>
+							<h2>Organic Fruits & Vegetables</h2>
+							<p>Get the best and freshest Fruit and Vegetables</p>
 						</div>
-					))}
-				</div>
+						<IoMdSearch className={homeStyles.searchIcon} />
+						<div className={homeStyles.filter}>
+							<input
+								type="text"
+								placeholder="Search for"
+								value={searchTerm}
+								onChange={(e) => setSearchTerm(e.target.value)}
+							/>
+						</div>
+					</div>
 
-				<ReactPaginate
-					previousLabel={"Previous"}
-					nextLabel={"Next"}
-					pageCount={pageCount}
-					onPageChange={handlePageClick}
-					containerClassName={homeStyles.pagination}
-					activeClassName={homeStyles.activePage}
-				/>
+					{loading && <p>Loading products...</p>}
+					{error && <p>{error}</p>}
+					{!loading && filteredProducts.length === 0 && (
+						<p className={homeStyles.noResult}>No products found.</p>
+					)}
+
+					<div className={homeStyles.productCard}>
+						{currentProducts.map((product, index) => (
+							<div key={index} className={homeStyles.productDisplay}>
+								<img
+									src={product.image}
+									alt={product.productName || "Product Image"}
+									className={homeStyles.image}
+									onClick={() => handleProductClick(product)}
+								/>
+								<div className={homeStyles.imageDetails}>
+									<h3
+										onClick={() => handleProductClick(product)}
+										className={homeStyles.ProductName}
+									>
+										{product.productName}
+										<p className={homeStyles.imagePrice}>
+											R{product.salePrice.toFixed(2)}
+										</p>
+									</h3>
+									<h3 className={homeStyles.imageCategory}>
+										{product.category}
+										<button className={homeStyles.addToCart}>
+											Add <BiCartAdd />
+										</button>
+									</h3>
+								</div>
+							</div>
+						))}
+					</div>
+
+					<ReactPaginate
+						previousLabel={"Previous"}
+						nextLabel={"Next"}
+						pageCount={pageCount}
+						onPageChange={handlePageClick}
+						containerClassName={homeStyles.pagination}
+						activeClassName={homeStyles.activePage}
+					/>
+				</div>
 			</div>
 		</div>
 	);
