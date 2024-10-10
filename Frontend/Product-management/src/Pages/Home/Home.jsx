@@ -16,7 +16,7 @@ const Home = () => {
 	const [currentPage, setCurrentPage] = useState(0);
 
 	const navigate = useNavigate();
-	const itemsPerPage = 10; // Number of products per page
+	const itemsPerPage = 8; // Number of products per page
 
 	// Fetch products from the database
 	useEffect(() => {

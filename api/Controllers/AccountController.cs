@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using System.Web;
 using api.Dtos.Account;
 using api.Dto.Passwords;
+using Microsoft.AspNetCore.Authorization;
 
 namespace api.Controllers
 {
@@ -28,7 +29,7 @@ namespace api.Controllers
     private readonly SignInManager<AppUser> _signinManager;
     private readonly IEmailService _emailService;
 
-    public AccountController(ApplicationDBContext context, UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager, ITokenService tokenService,
+    public AccountController(ApplicationDBContext context, UserManager<AppUser> userManager, ITokenService tokenService,
         SignInManager<AppUser> signInManager, IEmailService emailService)
     {
       _context = context;
@@ -52,6 +53,7 @@ namespace api.Controllers
         if (userExist != null)
         {
           return BadRequest("Email already exists.");
+
         }
 
         // Creating a new user
@@ -94,7 +96,7 @@ namespace api.Controllers
           // Send the confirmation email
           try
           {
-            await _emailService.SendEmailAsync(recipient, subject, header, userName, message, actionText, confirmationLink);
+            await _emailService.SendEmailAsync(recipient, subject, header, userName, message, actionText, confirmationLink!);
             return Ok("Successful registration. An email has been sent for verification.");
           }
           catch (Exception)
@@ -151,7 +153,7 @@ namespace api.Controllers
         user.VerifiedDate = DateTime.Now;
         await _context.SaveChangesAsync();
 
-        return Redirect("http://localhost:517/email-success");
+        return Redirect("http://localhost:5173/email-success");
       }
 
       // Handle errors during email confirmation
@@ -173,15 +175,19 @@ namespace api.Controllers
 
       var result = await _signinManager.CheckPasswordSignInAsync(user, loginDto.Password, lockoutOnFailure: true);
 
-      if (result.Succeeded)
+      if (user.EmailConfirmed == false)
+      {
+        return BadRequest("Email has not been verified, please check your email and verify your account.");
+      }
+      else if (result.Succeeded)
       {
         return Ok(new NewUserDto
         {
           AppUserId = user.Id,
           Name = user.Name,
           Surname = user.Surname,
-          UserName = user.UserName,
-          Email = user.Email,
+          UserName = user.UserName!,
+          Email = user.Email!,
           Token = _tokenService.CreateToken(user)
         });
       }
@@ -189,12 +195,13 @@ namespace api.Controllers
       {
         return BadRequest("Account locked due to multiple failed attempts. Please try after 5 minutes.");
       }
-      else if (result.IsNotAllowed)
+      else if (user.EmailConfirmed == false)
       {
         return BadRequest("Email has not been verified, please check your email and verify your account.");
       }
       else
       {
+        //Lock out user after multiple failed attempts
         var accessFailedCount = await _userManager.GetAccessFailedCountAsync(user);
         var maxFailedAccessAttempts = _userManager.Options.Lockout.MaxFailedAccessAttempts;
         var attemptsLeft = maxFailedAccessAttempts - accessFailedCount;
@@ -251,7 +258,7 @@ namespace api.Controllers
       return BadRequest("Error occurred. Unable to send email");
     }
 
-    //Resetting the users password
+    //Changing the users password once logged in
     [HttpPost("reset-password")]
     public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordDto resetPasswordDto)
     {
@@ -263,7 +270,7 @@ namespace api.Controllers
       if (user == null)
         return BadRequest("Invalid Email");
 
-      // URL-decode the token explicitly
+      // URL-decode the token
       var decodedToken = Uri.UnescapeDataString(resetPasswordDto.Token);
 
       // Validate the token (check if the token is expired or invalid)
@@ -280,7 +287,7 @@ namespace api.Controllers
       }
 
       // Check if the new password is the same as the old password
-      var currentPasswordVerification = _userManager.PasswordHasher.VerifyHashedPassword(user, user.PasswordHash, resetPasswordDto.NewPassword);
+      var currentPasswordVerification = _userManager.PasswordHasher.VerifyHashedPassword(user, user.PasswordHash!, resetPasswordDto.NewPassword);
       if (currentPasswordVerification == PasswordVerificationResult.Success)
       {
         return BadRequest("The new password cannot be the same as the old password.");
@@ -296,7 +303,6 @@ namespace api.Controllers
       }
 
       var backToLogin = Url.Action("http://localhost:5173");
-      // Prepare email details
       var recipient = user.Email;
       var subject = "Confirmation on Reset password";
       var header = "Successful password reset";
@@ -307,7 +313,7 @@ namespace api.Controllers
       // Send the confirmation email
       try
       {
-        await _emailService.SendEmailAsync(recipient, subject, header, userName, message, actionText, backToLogin);
+        await _emailService.SendEmailAsync(recipient!, subject, header, userName, message, actionText, backToLogin!);
         return Ok("Password has been reset successfully.");
       }
       catch (Exception)

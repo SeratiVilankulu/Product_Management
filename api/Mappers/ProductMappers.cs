@@ -15,7 +15,6 @@ namespace api.Mappers
       {
         Id = productModel.Id,
         ProductName = productModel.ProductName,
-        Description = productModel.Description,
         SalePrice = productModel.SalePrice,
         Image = productModel.Image
 

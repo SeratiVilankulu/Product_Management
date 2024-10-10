@@ -2,10 +2,19 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { GoHome } from "react-icons/go";
 import { BsGraphUpArrow } from "react-icons/bs";
+import { MdLogout } from "react-icons/md";
 import SideNavStyle from "./SideNav.module.css";
 
 const SideNavigation = () => {
 	const navigate = useNavigate();
+
+	const user = JSON.parse(localStorage.getItem("user"));
+
+	// Clears local storage and directs user to login
+	const handleLogout = async () => {
+		localStorage.clear();
+		setTimeout(() => navigate("/"), 3000);
+	};
 
 	return (
 		<div className={SideNavStyle.menu}>
@@ -23,7 +32,10 @@ const SideNavigation = () => {
 				>
 					<BsGraphUpArrow className={SideNavStyle.navIcons} /> Product Sales
 				</button>
-				
+
+				<button className={SideNavStyle.LogoutBtn} onClick={handleLogout}>
+					<MdLogout className={SideNavStyle.navIcons} /> Logout
+				</button>
 			</div>
 		</div>
 	);

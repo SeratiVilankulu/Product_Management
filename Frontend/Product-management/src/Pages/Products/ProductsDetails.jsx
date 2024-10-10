@@ -36,7 +36,7 @@ const ProductsDetails = () => {
 				);
 
 				setTotalQuantity(totalQty); // Set the total quantity
-				setTotalCost(totalPrice);
+				setTotalCost(totalPrice.toFixed(2));
 				console.log(response);
 			} catch (error) {
 				console.error("An error occurred while fetching product sales:", error);
@@ -68,9 +68,7 @@ const ProductsDetails = () => {
 							{product?.productName}
 						</h3>
 						<p className={productStyles.productCategory}>{product?.category}</p>
-						<p className={productStyles.productPrice}>
-							R{product?.salePrice.toFixed(2)}
-						</p>
+						<p className={productStyles.productPrice}>R{product?.salePrice}</p>
 					</div>
 				</div>
 			</div>
@@ -79,12 +77,12 @@ const ProductsDetails = () => {
 				<br />
 				<hr />
 				<h2>{totalQuantity}</h2>
-			</div>
-			<div className={productStyles.totalProducts}>
-				<p>Total products bought</p>
-				<br />
-				<hr />
-				<h2>R{totalCost}</h2>
+				<div className={productStyles.totalProducts}>
+					<p>Total products bought</p>
+					<br />
+					<hr />
+					<h2>R{totalCost}</h2>
+				</div>
 			</div>
 
 			<div className={productStyles.tableContainer}>

@@ -23,6 +23,7 @@ namespace api.Service
       emailMessage.To.Add(new MailboxAddress("", recipient));
       emailMessage.Subject = subject;
 
+      //Email structure
       emailMessage.Body = new TextPart(TextFormat.Html)
       {
         Text = $@"

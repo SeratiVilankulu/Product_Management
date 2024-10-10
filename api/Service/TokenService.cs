@@ -18,14 +18,14 @@ namespace api.Service
     public TokenService(IConfiguration config)
     {
       _config = config;
-      _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JWT:SigninKey"]));
+      _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JWT:SigninKey"]!));
     }
     public string CreateToken(AppUser user)
     {
       //Things used to identify user
       var claims = new List<Claim>
       {
-        new Claim(JwtRegisteredClaimNames.Email, user.Email),
+        new Claim(JwtRegisteredClaimNames.Email, user.Email!),
         new Claim(JwtRegisteredClaimNames.GivenName, user.Name),
         new Claim(JwtRegisteredClaimNames.FamilyName, user.Surname),
       };

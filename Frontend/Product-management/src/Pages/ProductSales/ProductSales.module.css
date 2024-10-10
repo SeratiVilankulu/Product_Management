@@ -1,7 +1,7 @@
 .salesWrapper {
 	display: flex;
 	min-width: 100vh;
-	min-height: 100vh;
+	max-height: 100vh;
 }
 
 .salesContainer {
@@ -95,7 +95,7 @@ td {
 	margin: 0 5px;
 	padding: 5px 10px;
 	cursor: pointer;
-  color: rgb(28, 55, 32);
+	color: rgb(28, 55, 32);
 }
 
 .pagination li:hover {

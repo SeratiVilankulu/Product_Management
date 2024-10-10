@@ -52,11 +52,16 @@ builder.Services.AddDbContext<ApplicationDBContext>(options =>
 
 builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
 {
+  //Password complexity requirements
   options.Password.RequireDigit = true;
   options.Password.RequireLowercase = true;
   options.Password.RequireUppercase = true;
   options.Password.RequireNonAlphanumeric = true;
   options.Password.RequiredLength = 8;
+
+  options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5); //Lockout user for 5 minutes when login failed
+  options.Lockout.MaxFailedAccessAttempts = 3; //User will be locked out after 3 failed attempts
+  options.Lockout.AllowedForNewUsers = true;
 })
 .AddEntityFrameworkStores<ApplicationDBContext>()
 .AddDefaultTokenProviders();
@@ -79,7 +84,7 @@ builder.Services.AddAuthentication(options =>
     ValidAudience = builder.Configuration["JWT:Audience"],
     ValidateIssuerSigningKey = true,
     IssuerSigningKey = new SymmetricSecurityKey(
-      System.Text.Encoding.UTF8.GetBytes(builder.Configuration["JWT:SigninKey"])
+      System.Text.Encoding.UTF8.GetBytes(builder.Configuration["JWT:SigninKey"]!)
     )
   };
 });

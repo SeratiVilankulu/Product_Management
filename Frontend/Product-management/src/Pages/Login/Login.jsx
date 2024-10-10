@@ -57,7 +57,7 @@ const Login = () => {
 			if (error.response) {
 				if (error.response.status === 401) {
 					setErrorMsg({
-						api: error.response.data.message || "Invalid credentials.",
+						api: error.response.data.message || "Email is not registered.",
 					});
 				} else if (error.response.status === 400) {
 					setErrorMsg({

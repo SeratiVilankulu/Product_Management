@@ -22,7 +22,8 @@
 	margin-top: auto;
 }
 
-.btn {
+.btn,
+.LogoutBtn {
 	display: flex;
 	align-items: center;
 	width: 300px;
@@ -39,8 +40,13 @@
 	background-color: #f8f9fa;
 }
 
+.LogoutBtn {
+	position: absolute;
+	top: 105vh;
+}
+
 .btn:hover,
-.logout:hover {
+.LogoutBtn:hover {
 	background: rgb(77, 170, 87);
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 	color: #f8f9fa;

@@ -10,6 +10,6 @@ namespace api.Dto.Passwords
   {
     [Required]
     // The email address of the user requesting the password reset.
-    public string? Email { get; set; }
+    public string Email { get; set; } = string.Empty;
   }
 }

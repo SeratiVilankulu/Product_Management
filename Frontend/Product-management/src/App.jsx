@@ -9,6 +9,7 @@ import EmailSuccess from "./Pages/Email/EmailSuccess";
 import ProductsDetails from "./Pages/Products/ProductsDetails";
 import ResetPassword from "./Pages/Password/ResetPassword";
 import ForgotPassword from "./Pages/Password/ForgotPassword.Jsx";
+import ChangePassword from "./Pages/Password/ChangePassword";
 
 const App = () => {
 	const router = createBrowserRouter([
@@ -39,6 +40,10 @@ const App = () => {
 		{
 			path: "/reset-password",
 			element: <ResetPassword />,
+		},
+		{
+			path: "/change-password",
+			element: <ChangePassword />,
 		},
 		{
 			path: "/product/:ID",
