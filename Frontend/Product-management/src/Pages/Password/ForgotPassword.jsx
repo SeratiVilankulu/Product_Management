@@ -61,7 +61,7 @@ const ForgotPassword = () => {
 			} else {
 				setErrorMsg({
 					email:
-						"There was a problem with sending the resetting passswod. Please try again later.",
+						"There was a problem with sending the resetting password. Please try again later.",
 				});
 			}
 			console.log(error.response);
@@ -112,7 +112,7 @@ const ForgotPassword = () => {
 					</Link>
 				</div>
 			</div>
-			</div>
+		</div>
 	);
 };
 

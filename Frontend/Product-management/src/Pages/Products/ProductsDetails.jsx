@@ -36,7 +36,7 @@ const ProductsDetails = () => {
 				);
 
 				setTotalQuantity(totalQty); // Set the total quantity
-				setTotalCost(totalPrice.toFixed(2));
+				setTotalCost(totalPrice.toFixed(0));
 				console.log(response);
 			} catch (error) {
 				console.error("An error occurred while fetching product sales:", error);
@@ -68,7 +68,7 @@ const ProductsDetails = () => {
 							{product?.productName}
 						</h3>
 						<p className={productStyles.productCategory}>{product?.category}</p>
-						<p className={productStyles.productPrice}>R{product?.salePrice}</p>
+						<p className={productStyles.productPrice}>R {product?.salePrice}</p>
 					</div>
 				</div>
 			</div>
@@ -81,7 +81,7 @@ const ProductsDetails = () => {
 					<p>Total products bought</p>
 					<br />
 					<hr />
-					<h2>R{totalCost}</h2>
+					<h2>R {totalCost}</h2>
 				</div>
 			</div>
 
@@ -99,7 +99,7 @@ const ProductsDetails = () => {
 							sales.map((productSale, index) => (
 								<tr key={index}>
 									<td>{productSale.saleQty}</td>
-									<td>R{productSale.salePrice.toFixed(2)}</td>
+									<td>R {productSale.salePrice.toFixed(2)}</td>
 									<td>
 										{new Date(productSale.saleDate).toLocaleDateString("en-GB")}
 									</td>

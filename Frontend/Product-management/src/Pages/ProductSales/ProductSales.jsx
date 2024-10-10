@@ -7,7 +7,7 @@ import TopNavigation from "../Navigation/TopNavigation";
 
 const ProductSales = () => {
 	const [productSales, setProductSales] = useState([]);
-	const [products, setProducts] = useState([]); // For storing product details
+	const [products, setProducts] = useState([]); // State for storing product details
 	const [currentPage, setCurrentPage] = useState(0);
 	const itemsPerPage = 10; // Adjusting so there are 10 sale records per page
 
@@ -89,7 +89,7 @@ const ProductSales = () => {
 										</td>
 										<td>
 											<p className={salesStyles.salePrice}>
-												R{productSale.salePrice.toFixed(2)}
+												R {productSale.salePrice.toFixed(2)}
 											</p>
 										</td>
 										<td>

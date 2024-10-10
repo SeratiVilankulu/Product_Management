@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PasswordStyles from "./Password.module.css";
 import { FaArrowLeft } from "react-icons/fa";
 
@@ -13,7 +13,6 @@ const ResetPassword = () => {
 	const [successMsg, setSuccessMsg] = useState("");
 	const [submitting, setSubmitting] = useState(false);
 
-	const location = useLocation();
 	const navigate = useNavigate();
 
 	// Extract query parameters from the URL

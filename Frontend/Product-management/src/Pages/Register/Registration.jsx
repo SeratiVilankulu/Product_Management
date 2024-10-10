@@ -97,12 +97,12 @@ const Registration = () => {
 			return;
 		}
 
-		//Form is being submmited
+		//Form is being submitted
 		setSubmitting(true);
 
 		try {
 			const response = await axios.post(
-				"http://localhost:5033/account/register", 
+				"http://localhost:5033/account/register",
 				{
 					Name: userData.Name,
 					Surname: userData.Surname,
@@ -114,7 +114,9 @@ const Registration = () => {
 			);
 			console.log("Response data:", response.data); // Log the response data
 
-			setSuccessMsg("Your account has been successfully created!");
+			setSuccessMsg(
+				"Your account has been successfully created! Please check your emails for verification link"
+			);
 			setTimeout(() => setOpenModal(true), 2500);
 		} catch (error) {
 			console.log("Error:", error);

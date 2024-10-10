@@ -8,8 +8,6 @@ import SideNavStyle from "./SideNav.module.css";
 const SideNavigation = () => {
 	const navigate = useNavigate();
 
-	const user = JSON.parse(localStorage.getItem("user"));
-
 	// Clears local storage and directs user to login
 	const handleLogout = async () => {
 		localStorage.clear();
